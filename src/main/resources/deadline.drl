@@ -1,0 +1,75 @@
+import com.example.droolstesting1.Deadline;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.drools.core.time.TimeUtils;
+import java.util.Date
+import java.util.Calendar
+import java.text.ParsePosition;
+
+rule "Mensual"
+
+when
+  $deadlineObject : Deadline(createdDate=="2023-06-25" )
+then
+
+   // Obtén la fecha actual
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato de fecha deseado
+    String currentDateStr = sdf.format(new Date());
+
+    // Concatena la fecha actual al resultado
+    String newResult = "estado inatendito por más de 1 Mes - Fecha actual: " + (currentDateStr);
+
+    // Establece el nuevo resultado en el objeto Deadline
+    $deadlineObject.setResult(newResult);
+    $deadlineObject.setState(false);
+    $deadlineObject.setType("Mensual");
+
+    update($deadlineObject); // Asegura que el objeto se actualice en la sesión de Drools
+
+end;
+
+
+rule "Semanal"
+
+when
+  $deadlineObject : Deadline(createdDate=="2023-09-21")
+then
+
+   // Obtén la fecha actual
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato de fecha deseado
+    String currentDateStr = sdf.format(new Date());
+
+    // Concatena la fecha actual al resultado
+    String newResult = "estado inatendito por más de 1 Semana - Fecha actual: " + (currentDateStr);
+
+    // Establece el nuevo resultado en el objeto Deadline
+    $deadlineObject.setResult(newResult);
+    $deadlineObject.setState(false);
+    $deadlineObject.setType("Semanal");
+
+    update($deadlineObject); // Asegura que el objeto se actualice en la sesión de Drools
+
+end;
+
+rule "Diaria"
+
+when
+  $deadlineObject : Deadline(createdDate=="2023-09-28")
+then
+
+   // Obtén la fecha actual
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Formato de fecha deseado
+    String currentDateStr = sdf.format(new Date());
+
+    // Concatena la fecha actual al resultado
+    String newResult = "estado inatendito por más de 1 dia - Fecha actual: " + (currentDateStr);
+
+    // Establece el nuevo resultado en el objeto Deadline
+    $deadlineObject.setResult(newResult);
+    $deadlineObject.setState(false);
+    $deadlineObject.setType("Diaria");
+
+    update($deadlineObject); // Asegura que el objeto se actualice en la sesión de Drools
+
+end;
+
